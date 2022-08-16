@@ -93,7 +93,7 @@ SELECT * FROM LoggerBase.TestLog
 **********************************************************************************************/
 
 ALTER PROCEDURE LoggerBase.Appender_LocalDatabaseAppender
-(@LoggerName VARCHAR(500), @LogLevelName VARCHAR(500), @Message VARCHAR(MAX), @Config XML, @CorrelationId VARCHAR(50), @Debug BIT=0)
+(@LoggerName VARCHAR(500), @LogLevelName VARCHAR(500), @Message VARCHAR(MAX), @Config XML, @CorrelationId VARCHAR(50), @Debug BIT=0, @TokenValues VARCHAR(MAX))
 AS
 	SET NOCOUNT ON
 
@@ -150,6 +150,7 @@ AS
 		, @Message         = @Message
 		, @LayoutConfig    = @LayoutConfig
 		, @Debug           = @Debug
+		, @TokenValues     = @TokenValues
 		, @FormattedMessage = @FormattedMessage OUTPUT
 
 	  UPDATE #Parameters SET ParameterValue = @FormattedMessage
