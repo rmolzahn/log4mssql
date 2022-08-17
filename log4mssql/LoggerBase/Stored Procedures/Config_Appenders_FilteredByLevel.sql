@@ -62,9 +62,9 @@ AS
 	FROM       LoggerBase.Config_Root_Get     (@Config) R
 	INNER JOIN LoggerBase.Config_Appenders_Get(@Config) A ON R.AppenderRef = A.AppenderName
 	--Check if we have an override in the session that changes the root-appender defined logging level.
-	--INNER JOIN LoggerBase.Core_Level                    LL ON COALESCE(LoggerBase.Session_Level_Get(),  R.LevelValue)  = LL.LogLevelName
+	INNER JOIN LoggerBase.Core_Level                    LL ON COALESCE(LoggerBase.Session_Level_Get(),  R.LevelValue)  = LL.LogLevelName
 	--AND LL.LogLevelValue <= (SELECT LogLevelValue FROM LoggerBase.Core_Level WHERE LogLevelName = @RequestedLogLevelName)
-	INNER JOIN LoggerBase.Core_Level                    LL ON R.LevelValue  = LL.LogLevelName
+	--INNER JOIN LoggerBase.Core_Level                    LL ON R.LevelValue  = LL.LogLevelName
 	WHERE 1=1
 	AND LL.LogLevelValue <= @LogLevelValue
 	--AND LL.LogLevelValue <= (SELECT LogLevelValue FROM LoggerBase.Core_Level WHERE LogLevelName = @RequestedLogLevelName)

@@ -40,14 +40,14 @@ AS RETURN
 (
 	SELECT '%d ' AS Token, 'Date' AS TokenProperty, '' AS TokenDescription, CONCAT(CONVERT(CHAR(10), LoggerBase.Layout_GetDate(), 120), ' ') 
 	AS TokenCurrentValue
-	UNION ALL SELECT '%date', 'Date', '', CONCAT(CONVERT(CHAR(10), LoggerBase.Layout_GetDate(), 120), '') 
+	UNION ALL SELECT '%date', 'Date', '', CONCAT(CONVERT(CHAR(23), LoggerBase.Layout_GetDate(), 121), '') 
 	UNION ALL SELECT '%logger',        'Logger',          '', @LoggerName
 	UNION ALL SELECT '%identity',      'Identity',        '', LoggerBase.Layout_LoginUser()
 	UNION ALL SELECT '%m ',             'Message',         '', CONCAT(@Message, ' ')
 	UNION ALL SELECT '%message',       'Message',         '', @Message
 	UNION ALL SELECT '%n ', 'NewLine', '', CHAR(13)
 	UNION ALL SELECT '%newline', 'NewLine', '', CHAR(13)
-	UNION ALL SELECT '%Level',             'Level',           '', @LogLevelName
+	UNION ALL SELECT '%level',             'Level',           '', @LogLevelName
 	UNION ALL SELECT '%p ',             'Level',           '', CONCAT(@LogLevelName,' ')
 	UNION ALL SELECT '%r ',             'TimeStamp',       '', CONCAT(SYSDATETIME(),' ')
 	UNION ALL SELECT '% ',              'SessionId',       '', CONCAT(COALESCE(@SessionId, @@SPID), ' ')
