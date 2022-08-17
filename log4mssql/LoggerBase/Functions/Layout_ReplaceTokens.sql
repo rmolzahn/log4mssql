@@ -28,7 +28,7 @@ BEGIN
 
 	-- Add the T-SQL statements to compute the return value here
 	SELECT @ConversionPattern = REPLACE(@ConversionPattern, Token, COALESCE(TokenCurrentValue,''))
-	FROM LoggerBase.Layout_GetTokens(@LoggerName, @LogLevelName, @Message, @CorrelationId, @DatabaseName, @ServerName, @SessionId)
+	FROM LoggerBase.Layout_GetTokens(@LoggerName, @LogLevelName, @Message, @CorrelationId, @DatabaseName, @ServerName, @SessionID)
 
 	-- Return the result of the function
 	RETURN @ConversionPattern
