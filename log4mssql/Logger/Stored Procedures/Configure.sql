@@ -59,7 +59,7 @@ BEGIN
 	SET @NewConfiguration = @CurrentConfiguration
 
 	--Use sp_executesql so that we can catch the error if LoggerBase.Util_Configuration_Properties doesn't exist. 
-	IF (@DEBUG = 1) PRINT CONCAT('Checking if @PropertyName ', COALESCE(@PropertyName, 'NULL'), ' is valid')
+	IF (@Debug = 1) PRINT CONCAT('Checking if @PropertyName ', COALESCE(@PropertyName, 'NULL'), ' is valid')
 	DECLARE @PropertyExists BIT
 	EXEC sp_executesql N'SELECT @PropertyExists = 1 FROM LoggerBase.Util_Configuration_Properties WHERE ConfigurationPropertyName = @PropertyName', N'@PropertyExists BIT OUTPUT, @PropertyName VARCHAR(5000)', @PropertyExists = @PropertyExists OUTPUT, @PropertyName = @PropertyName
 	IF (COALESCE(@PropertyName,'') <> '' AND COALESCE(@PropertyExists, 0) <> 1)
@@ -101,12 +101,12 @@ BEGIN
 	
 		IF (@PropertyName IS NULL)
 		BEGIN
-			IF (@DEBUG = 1) PRINT '@PropertyName is null. Setting defaults.'
+			IF (@Debug = 1) PRINT '@PropertyName is null. Setting defaults.'
 
 			DECLARE @LoggerName VARCHAR(500) = CONCAT(OBJECT_SCHEMA_NAME(@CallingProcedureId), '.', OBJECT_NAME(@CallingProcedureId))
 			IF (@CallingProcedureId IS NOT NULL AND OBJECT_NAME(@CallingProcedureId) IS NOT NULL)
 			BEGIN	
-				IF (@DEBUG =1) PRINT '@CallingProcedureId is valid. Checking if we should use it to set the logger name.'
+				IF (@Debug =1) PRINT '@CallingProcedureId is valid. Checking if we should use it to set the logger name.'
 				EXEC sp_executesql @CheckSQL, N'@CurrentConfiguration LogConfiguration, @PropertyExists BIT OUTPUT, @PropertyName VARCHAR(5000)', @CurrentConfiguration = @CurrentConfiguration, @PropertyExists = @PropertyExists OUTPUT, @PropertyName = 'LoggerName'
 			
 				IF (@PropertyExists = 0) 

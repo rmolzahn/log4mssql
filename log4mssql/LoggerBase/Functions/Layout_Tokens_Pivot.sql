@@ -25,7 +25,7 @@ RETURNS @Values TABLE
 (
      ServerName  SYSNAME
 	,DatabaseName SYSNAME
-    ,SessionId INT
+    ,SessionID INT
 )
 AS
 -- body of the function

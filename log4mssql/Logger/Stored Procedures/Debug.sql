@@ -44,7 +44,7 @@ ALTER PROCEDURE Logger.Debug
 	, @LoggerName            VARCHAR(500) = NULL
 	, @Config                XML          = NULL
 	, @StoredConfigName      VARCHAR(500) = NULL
-	, @LogConfiguration      LogConfiguration	
+	, @LogConfiguration      LogConfiguration = NULL	
 	, @Debug                 BIT          = 0
 )
 
@@ -63,7 +63,7 @@ AS
 		, @StoredConfigName      = @StoredConfigName
 		, @LogConfiguration      = @LogConfiguration
 		, @TokenValues           = @TokenValues
-		, @DEBUG                 = @DEBUG
+		, @Debug                 = @DEBUG
 	END TRY
 	BEGIN CATCH
 		DECLARE @ErrorMessage VARCHAR(8000) = CONCAT('[',OBJECT_SCHEMA_NAME(@@PROCID),'].[',OBJECT_NAME(@@PROCID),'] An error occurred in the logging framework: ', ERROR_MESSAGE(), ' (', ERROR_NUMBER(), ')')
