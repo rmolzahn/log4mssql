@@ -83,7 +83,7 @@ AS
 	)
 	FROM LoggerBase.Util_Split(@ConversionPattern, '|') T
 	--LEFT JOIN @TokenReplacements R ON T.Item = R.TokenElement
-	LEFT JOIN LoggerBase.Layout_GetTokens(@LoggerName, @LogLevelName, @Message, @CorrelationId, @DatabaseName, @ServerName, @SessionId) R ON T.Item = R.Token
+	LEFT JOIN LoggerBase.Layout_GetTokens(@LoggerName, @LogLevelName, @Message, @CorrelationId, @DatabaseName, @ServerName, @SessionID) R ON T.Item = R.Token
 
 	SET @FormattedMessage = CONCAT('{', @FormattedMessage, '}')
 	
